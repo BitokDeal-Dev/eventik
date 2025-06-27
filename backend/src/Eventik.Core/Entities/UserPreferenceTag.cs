@@ -9,6 +9,5 @@ public class UserPreferenceTag
 
     [Required, MaxLength(50)]
     public PreferenceType Type { get; init; }
-    
     public ICollection<UserEntity> Users { get; init; } = new List<UserEntity>();
 }

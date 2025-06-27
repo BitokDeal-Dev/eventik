@@ -1,22 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Eventik.Core.Entities;
 
-public class UserEntity
+public class UserEntity : IdentityUser<Guid>
 {
-    public Guid Id { get; init; }
+    [Required, MaxLength(50)] public string FirstName { get; init; } = string.Empty;
 
-    [Required, EmailAddress, MaxLength(255)]
-    public string Email { get; init; } = string.Empty;
+    [Required, MaxLength(50)] public string LastName { get; init; } = string.Empty;
 
-    [Required, MaxLength(128)] 
-    public string PasswordHash { get; init; } = string.Empty;
+    [Required, MaxLength(100)] public string City { get; init; } = string.Empty;
 
-    [Required]
-    public string City { get; init; } = string.Empty;
-
-    public string? Name { get; init; }
-    public string? Surname { get; init; }
-    
-    public ICollection<UserPreferenceTag> Preferences { get; init; } = new List<UserPreferenceTag>();
+    public ICollection<UserPreferenceTag> PreferenceTags { get; init; } = new List<UserPreferenceTag>();
 }
