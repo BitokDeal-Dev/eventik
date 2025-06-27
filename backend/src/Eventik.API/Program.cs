@@ -1,21 +1,27 @@
-using Eventik.Infrastructure.ServiceConfiguration;
+using Eventik.API.Endpoints;
+using Eventik.API.ServiceConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Configuration
     .AddJsonFile("appsettings.json")
     .AddEnvironmentVariables();
 
-builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services
+    .AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .AddApplication();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.MapAuthEndpoints();
 
 await app.RunAsync();

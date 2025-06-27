@@ -8,16 +8,13 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Eventik.Application\Eventik.Application.csproj" />
       <ProjectReference Include="..\Eventik.Infrastructure\Eventik.Infrastructure.csproj" />
       <ProjectReference Include="..\Eventik.Shared\Eventik.Shared.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Endpoints\" />
     </ItemGroup>
 
 </Project>
