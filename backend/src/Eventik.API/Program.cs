@@ -11,7 +11,9 @@ builder.Configuration
     .AddEnvironmentVariables();
 
 builder.Services
-    .AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .AddInfrastructure(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        builder.Configuration)
     .AddApplication();
 
 var app = builder.Build();
@@ -22,6 +24,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapAuthEndpoints();
 
+await app.UseMigrationsAndSeeding();
 await app.RunAsync();

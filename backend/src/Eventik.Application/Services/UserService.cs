@@ -14,7 +14,7 @@ public class UserService(
     public async Task<Result<UserResponse>> CreateUserAsync(CreateUserRequest request)
     {
         // Validate request
-        if (string.IsNullOrWhiteSpace(request.Name))
+        if (string.IsNullOrWhiteSpace(request.FirstName))
             return Result.Fail("Name is required");
 
         if (string.IsNullOrWhiteSpace(request.City))
@@ -28,7 +28,8 @@ public class UserService(
         var user = new UserEntity
         {
             Email = request.Email,
-            Name = request.Name,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
             City = request.City,
             PasswordHash = passwordHasher.HashPassword(request.Password),
         };
@@ -38,7 +39,8 @@ public class UserService(
         return Result.Ok(new UserResponse(
             user.Id,
             user.Email,
-            user.Name));
+            user.FirstName,
+            user.LastName));
     }
 
     public async Task<Result<UserResponse>> GetUserAsync(Guid userId)
@@ -53,6 +55,7 @@ public class UserService(
         return Result.Ok(new UserResponse(
             user.Id,
             user.Email,
-            user.Name));
+            user.FirstName,
+            user.LastName));
     }
 }

@@ -8,41 +8,34 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Eventik.Infrastructure.Services;
 
-public class JwtTokenService : ITokenService
+public class JwtTokenService(IConfiguration configuration) : ITokenService
 {
-    private readonly IConfiguration _configuration;
-    private readonly SymmetricSecurityKey _key;
-    private readonly TimeSpan _tokenLifetime;
-
-    public JwtTokenService(IConfiguration configuration)
-    {
-        _configuration = configuration;
-        _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-            _configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key not configured")));
-        _tokenLifetime = TimeSpan.FromHours(
-            _configuration.GetValue<double>("Jwt:TokenLifetimeHours"));
-    }
+    private readonly string? _key = configuration["Jwt:Key"];
+    private readonly string? _issuer = configuration["Jwt:Issuer"];
+    private readonly string? _audience = configuration["Jwt:Audience"];
+    private readonly int _expiryInMinutes = configuration.GetValue("Jwt:ExpiryInMinutes", 60);
 
     public string GenerateToken(UserEntity user)
     {
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new(JwtRegisteredClaimNames.Email, user.Email),
+            new(JwtRegisteredClaimNames.Email, user.Email!),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new("name", user.Name ?? string.Empty),
+            new("name", user.UserName ?? string.Empty),
             new("city", user.City)
         };
 
-        var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key!));
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.Add(_tokenLifetime),
+            Expires = DateTime.UtcNow.AddMinutes(_expiryInMinutes),
             SigningCredentials = credentials,
-            Issuer = _configuration["Jwt:Issuer"],
-            Audience = _configuration["Jwt:Audience"]
+            Issuer = _issuer,
+            Audience = _audience
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -52,21 +45,24 @@ public class JwtTokenService : ITokenService
 
     public async Task<bool> ValidateTokenAsync(string token)
     {
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key!));
         var tokenHandler = new JwtSecurityTokenHandler();
+
         try
         {
-            await tokenHandler.ValidateTokenAsync(token, new TokenValidationParameters
+            tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = _key,
+                IssuerSigningKey = key,
                 ValidateIssuer = true,
-                ValidIssuer = _configuration["Jwt:Issuer"],
+                ValidIssuer = _issuer,
                 ValidateAudience = true,
-                ValidAudience = _configuration["Jwt:Audience"],
+                ValidAudience = _audience,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero
-            });
-            return true;
+            }, out _);
+
+            return await Task.FromResult(true);
         }
         catch
         {

@@ -2,7 +2,6 @@
 using Eventik.Application.DTOs.Auth.Response;
 using Eventik.Application.Interfaces.Services;
 using Eventik.Core.Entities;
-using Eventik.Core.Interfaces;
 using Eventik.Core.Interfaces.Repositories;
 using Eventik.Core.Interfaces.Services;
 using FluentResults;
@@ -24,7 +23,7 @@ public class AuthService(
         {
             Email = request.Email,
             PasswordHash = passwordHasher.HashPassword(request.Password),
-            Name = request.Name
+            UserName = request.Name
         };
 
         await userRepository.AddAsync(user);
@@ -35,8 +34,18 @@ public class AuthService(
 
     public async Task<Result<AuthResponse>> LoginAsync(LoginRequest request)
     {
+        if (string.IsNullOrWhiteSpace(request.Email))
+            return Result.Fail("Email is required");
+
+        if (string.IsNullOrWhiteSpace(request.Password))
+            return Result.Fail("Password is required");
+
         var user = await userRepository.GetByEmailAsync(request.Email);
-        if (user == null || !passwordHasher.VerifyPassword(request.Password, user.PasswordHash))
+        if (user == null)
+            return Result.Fail("Invalid credentials");
+
+        // Fix parameter order here - hashedPassword first, then provided password
+        if (user.PasswordHash != null && !passwordHasher.VerifyPassword(user.PasswordHash, request.Password))
             return Result.Fail("Invalid credentials");
 
         return new AuthResponse(tokenService.GenerateToken(user), user.Id, user.Email);
