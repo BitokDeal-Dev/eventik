@@ -1,6 +1,6 @@
 ﻿using Eventik.Core.Entities;
 
-namespace Eventik.Core.Interfaces;
+namespace Eventik.Core.Interfaces.Repositories;
 
 public interface IUserRepository : IRepository<UserEntity>
 {

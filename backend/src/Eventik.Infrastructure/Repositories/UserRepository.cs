@@ -1,5 +1,5 @@
 ﻿using Eventik.Core.Entities;
-using Eventik.Core.Interfaces;
+using Eventik.Core.Interfaces.Repositories;
 using Eventik.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

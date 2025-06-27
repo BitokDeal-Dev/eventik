@@ -1,4 +1,4 @@
-﻿using Eventik.Core.Interfaces;
+﻿using Eventik.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eventik.Infrastructure.Repositories;

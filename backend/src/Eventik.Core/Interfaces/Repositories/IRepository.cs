@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Eventik.Core.Interfaces;
+namespace Eventik.Core.Interfaces.Repositories;
 
 public interface IRepository<T> where T : class
 {
