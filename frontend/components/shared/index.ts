@@ -1,2 +1,6 @@
 export {Header} from './header'
 export {IconWithTitle} from './icon-with-title'
+export {HeaderAdditionalInfo} from './header-additional-info'
+export {HeaderInput} from './header-input'
+export {MobileMenu} from './mobile-menu'
+export * from './icons'

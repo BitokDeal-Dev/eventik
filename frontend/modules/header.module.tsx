@@ -1,10 +1,11 @@
-import React from 'react';
+import {Header, HeaderAdditionalInfo} from "@/components/shared";
 
 const HeaderModule = () => {
     return (
-        <div>
-
-        </div>
+        <header className='w-full bg-section rounded-lg flex flex-col'>
+            <Header />
+            <HeaderAdditionalInfo />
+        </header>
     );
 };
 

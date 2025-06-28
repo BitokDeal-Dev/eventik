@@ -1,53 +1,53 @@
-import React from 'react';
-import {IconWithTitle} from "@/components/shared/icon-with-title";
-import {DotsIcon, HeartIcon, UserIcon} from "@/components/shared/icons";
-import HeaderInput from "@/components/shared/header-input";
+'use client'
+
+import React, {useState} from 'react';
+import {
+    DotsIcon,
+    HeartIcon,
+    UserIcon,
+    HeaderInput,
+    IconWithTitle, MobileMenu
+} from "@/components/shared/";
 import {Button} from "@/components/ui/button";
+import {Menu, X} from "lucide-react";
 
 export const Header = () => {
+    const [isOpenModal, setIsOpenModal] = useState(false)
+
+    const toggleMenu = () => setIsOpenModal(!isOpenModal);
+
     return (
-        <header className='w-full bg-section rounded-lg flex flex-col'>
-            <nav className="flex items-center  gap-4 py-2">
-                <div className="flex">
-                    <img src="/logo.svg" alt="eventik-logo"/>
-                </div>
+        <nav className="flex items-center  gap-4 py-2">
+            <div className="flex">
+                <img src="/logo.svg" alt="eventik-logo"/>
+            </div>
 
-                <div className="flex-[2]">
-                    <HeaderInput/>
-                </div>
+            <div className="flex-[2]">
+                <HeaderInput/>
+            </div>
 
-                <div className="flex justify-end mr-4">
-                    <div className="flex gap-3 md:gap-8 items-center">
-                        <IconWithTitle icon={<UserIcon/>} title="Увійти"/>
-                        <IconWithTitle icon={<HeartIcon/>} title="Збережені"/>
-                        <Button>
-                            <div className="flex items-center gap-0 md:gap-1">
-                                <DotsIcon />
-                                <p className="hidden md:block">
-                                    Створити подію
-                                </p>
-                            </div>
-                        </Button>
-                    </div>
+            <div className="flex justify-end mr-4">
+                <div className="hidden md:flex gap-3 md:gap-8 items-center">
+                    <IconWithTitle icon={<UserIcon/>} title="Увійти"/>
+                    <IconWithTitle icon={<HeartIcon/>} title="Збережені"/>
+                    <Button>
+                        <div className="flex items-center gap-0 md:gap-1">
+                            <DotsIcon/>
+                            <p className="hidden md:block">
+                                Створити подію
+                            </p>
+                        </div>
+                    </Button>
                 </div>
-            </nav>
-            <nav className="flex justify-between px-16 mb-3 flex-wrap gap-2">
-                <p className="md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Про нас</p>
-                <p className="md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Як це працює</p>
-                <p className="md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">FAQ / Питання</p>
-                <p className="hidden md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Для організаторів</p>
-                <p className="hidden md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Контакти</p>
-                <p className="hidden md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Новини</p>
-                <p className="hidden md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Блог</p>
-                <p className="hidden md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Огляди подій</p>
-                <p className="hidden md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Стати спонсором</p>
+            </div>
+            <button className='md:hidden mr-4' onClick={toggleMenu}>
+                {isOpenModal ? <X size={24}/> : <Menu size={24}/>}
+            </button>
 
-                <div className="flex items-center gap-2 ml-6 mr-3">
-                    <p className="text-muted cursor-pointer transition-all duration-100">Обране місто:</p>
-                    <p className="text-primary font-semibold">Лондон</p>
-                </div>
-            </nav>
 
-        </header>
+            {isOpenModal && (
+                <MobileMenu onCloseAction={toggleMenu} />
+            )}
+        </nav>
     );
 };
