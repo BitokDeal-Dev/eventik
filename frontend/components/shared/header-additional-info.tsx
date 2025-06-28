@@ -14,8 +14,8 @@ export const HeaderAdditionalInfo = () => {
             <p className="hidden text-sm font-medium md:block text-muted cursor-pointer hover:opacity-70 transition-all duration-100">Стати спонсором</p>
 
             <div className="hidden md:flex items-center gap-2 ml-6 mr-3">
-                <p className="text-muted text-sm font-medium cursor-pointer transition-all duration-100">Обране місто:</p>
-                <p className="text-primary font-semibold">Лондон</p>
+                <p className="text-muted text-sm font-medium transition-all duration-100">Обране місто:</p>
+                <p className="text-primary text-sm font-semibold cursor-pointer">Лондон</p>
             </div>
         </nav>
     );

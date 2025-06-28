@@ -18,9 +18,9 @@ export const Header = () => {
 
     return (
         <nav className="flex items-center  gap-4 py-2">
-            <div className="flex">
+            <a href='/' className="flex">
                 <img src="/logo.svg" alt="eventik-logo"/>
-            </div>
+            </a>
 
             <div className="flex-[2]">
                 <HeaderInput/>

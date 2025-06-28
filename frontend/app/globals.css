@@ -10,8 +10,8 @@
     --section: 0, 0%, 100%;
     --foreground: 0, 0%, 10%;
 
-    --muted: #99a3ae;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210, 10%, 65%;
+    --muted-foreground: 220, 50%, 97%;
 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -38,8 +38,8 @@
     --section: 0, 0%, 9%;
     --foreground: 0, 0%, 100%;
 
-    --muted: #99a3ae;
-    --muted-foreground: 215.4 16.3% 56.9%;
+    --muted: 210, 10%, 65%;
+    --muted-foreground: 220, 50%, 97%;
 
     --accent: 227, 13%, 27%;
     --accent-foreground: 210 40% 98%;
