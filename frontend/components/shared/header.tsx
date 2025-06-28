@@ -6,7 +6,7 @@ import {
     HeartIcon,
     UserIcon,
     HeaderInput,
-    IconWithTitle, MobileMenu
+    IconWithTitle, MobileMenu, HoverLoginPrompt
 } from "@/components/shared/";
 import {Button} from "@/components/ui/button";
 import {Menu, X} from "lucide-react";
@@ -28,12 +28,19 @@ export const Header = () => {
 
             <div className="flex justify-end mr-4">
                 <div className="hidden md:flex gap-3 md:gap-8 items-center">
-                    <IconWithTitle icon={<UserIcon/>} title="Увійти"/>
+                    <HoverLoginPrompt
+                        trigger={
+                            <IconWithTitle
+                                icon={<UserIcon />}
+                                title="Увійти"
+                            />
+                        }
+                    />
                     <IconWithTitle icon={<HeartIcon/>} title="Збережені"/>
                     <Button>
                         <div className="flex items-center gap-0 md:gap-1">
                             <DotsIcon/>
-                            <p className="hidden md:block">
+                            <p className="hidden md:block text-[15px]">
                                 Створити подію
                             </p>
                         </div>

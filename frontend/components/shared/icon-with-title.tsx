@@ -1,21 +1,35 @@
-import React from 'react';
-import {cn} from "@/lib/utils";
+import React, { forwardRef } from "react"
+import { cn } from "@/lib/utils"
 
-export const IconWithTitle = (
-    {icon, title, className, titleClassName}: {
-        icon: React.ReactNode,
-        title?: string,
-        className?: string
-        titleClassName?: string
-    }
-) => {
-    return (
-        <div
-            className={cn('group flex flex-col items-center justify-center gap-0 cursor-pointer  hover:text-primary transition-colors', className)}>
+interface IconWithTitleProps {
+    icon: React.ReactNode
+    title?: string
+    className?: string
+    titleClassName?: string
+}
+
+export const IconWithTitle = forwardRef<HTMLButtonElement, IconWithTitleProps>(
+    ({ icon, title, className, titleClassName }, ref) => (
+        <button
+            ref={ref}
+            className={cn(
+                "group flex flex-col items-center justify-center gap-0 cursor-pointer hover:text-primary transition-colors",
+                className
+            )}
+        >
             {icon}
-            <p className={cn('hidden md:block text-[13px] font-medium',titleClassName)}>
-                {title}
-            </p>
-        </div>
-    );
-};
+            {title && (
+                <p
+                    className={cn(
+                        "hidden md:block text-[13px] font-medium",
+                        titleClassName
+                    )}
+                >
+                    {title}
+                </p>
+            )}
+        </button>
+    )
+)
+
+IconWithTitle.displayName = "IconWithTitle"

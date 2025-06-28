@@ -25,7 +25,7 @@
     --primary: 219, 100%, 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 29% 96%;
+    --secondary: #ebf7ff;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --border: 214.3 31.8% 91.4%;
@@ -53,7 +53,7 @@
     --primary: 219, 100%, 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 230, 12%, 29%;
+    --secondary: #ebf7ff;
     --secondary-foreground: 210 40% 98%;
 
     --border: 217, 19%, 27%;
@@ -74,7 +74,7 @@
   body {
     @apply overscroll-none bg-background text-foreground;
 
-    font-family: var(--font-geist-sans), sans-serif;
+    font-family: var(--font-onest-sans), sans-serif;
     height: 100vh;
   }
 }
