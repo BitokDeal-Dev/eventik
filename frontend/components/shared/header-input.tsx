@@ -3,7 +3,7 @@
 import React from 'react';
 import {Search} from "lucide-react";
 import {useWindowWidth} from "@/hooks/useWindowWidth";
-import SearchScopeSelector from "@/components/shared/search-scope-selector";
+import {SearchScopeSelector} from "@/components/shared/";
 
 export const HeaderInput = () => {
     const width = useWindowWidth()

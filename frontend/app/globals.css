@@ -8,7 +8,7 @@
   :root {
     --background: 216, 33%, 97%;
     --section: 0, 0%, 100%;
-    --foreground: 0, 0%, 10%;
+    --foreground:  227, 8.8%, 5%;
 
     --muted: 210, 10%, 65%;
     --muted-foreground: 220, 50%, 97%;
@@ -101,4 +101,11 @@
 
 ::-webkit-scrollbar-thumb {
   @apply rounded-full bg-secondary;
+}
+
+
+@media (min-width: 1300px) {
+  .custom-1300\:flex-row {
+    flex-direction: row;
+  }
 }

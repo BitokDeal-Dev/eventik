@@ -23,7 +23,7 @@ const filters = [
 
 ]
 
-const SearchScopeSelector = () => {
+export const SearchScopeSelector = () => {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(filters[0].value)
     return (
@@ -66,5 +66,3 @@ const SearchScopeSelector = () => {
         </Popover>
     );
 };
-
-export default SearchScopeSelector;
