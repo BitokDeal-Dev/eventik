@@ -25,8 +25,11 @@
     --primary: 219, 100%, 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 315, 100%, 57%;
-    --secondary-foreground: 316, 100%, 94%;
+    --secondary: 210 29% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --alternative: 315, 100%, 57%;
+    --alternative-foreground: 316, 100%, 94%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 240, 7%, 97%;
@@ -53,8 +56,11 @@
     --primary: 219, 100%, 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 315, 100%, 57%;
-    --secondary-foreground: 316, 100%, 94%;
+    --secondary: 230, 12%, 29%;
+    --secondary-foreground: 210 40% 98%;
+
+    --alternative: 315, 100%, 57%;
+    --alternative-foreground: 316, 100%, 94%;
 
     --border: 217, 19%, 27%;
     --input: 227, 13%, 14%;
@@ -101,11 +107,4 @@
 
 ::-webkit-scrollbar-thumb {
   @apply rounded-full bg-secondary;
-}
-
-
-@media (min-width: 1300px) {
-  .custom-1300\:flex-row {
-    flex-direction: row;
-  }
 }

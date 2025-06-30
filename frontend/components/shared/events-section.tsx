@@ -17,11 +17,11 @@ export const EventsSection = ({
 
             <div className='h-full flex flex-col w-full items-center md:items-start'>
                 <div className='flex flex-col md:flex-row gap-5 w-full items-center md:items-start text-center md:text-left'>
-                    <h2 className="max-w-lg text-3xl font-bold text-secondary">
+                    <h2 className="max-w-lg text-3xl font-bold text-alternative">
                         {title}
                     </h2>
                     <a
-                        className='bg-secondary-foreground text-center p-1 text-secondary font-bold text-base rounded-[12px]'
+                        className='bg-alternative-foreground text-center p-1 text-alternative font-bold text-base rounded-[12px]'
                         href={`/events/${slug}`}
                     >
                         Дивитись більше
@@ -31,7 +31,7 @@ export const EventsSection = ({
                 <div className='w-full'>
                     {events.length === 0 && (
                         <div className='flex justify-center items-center min-h-[200px]'>
-                            <h2 className='font-bold text-3xl'>На жаль немає івентів</h2>
+                            <h2 className='font-bold text-3xl'>На жаль ми не знайшли івентів</h2>
                         </div>
                     )}
                 </div>
