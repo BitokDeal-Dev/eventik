@@ -11,8 +11,7 @@ public static class AuthEndpoints
     public static void MapAuthEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/auth")
-            .WithTags("Authentication")
-            .WithOpenApi();
+            .WithTags("Authentication");
 
         group.MapPost("/register", Register)
             .Produces<AuthResponse>(StatusCodes.Status201Created)

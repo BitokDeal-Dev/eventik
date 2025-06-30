@@ -1,33 +1,20 @@
-﻿using BCrypt.Net;
+﻿using Microsoft.AspNetCore.Identity;
 using Eventik.Core.Interfaces.Services;
 
 namespace Eventik.Infrastructure.Services;
 
 public class BCryptPasswordHasher : IPasswordHasher
 {
+    private readonly PasswordHasher<object> _hasher = new();
+
     public string HashPassword(string password)
     {
-        if (string.IsNullOrEmpty(password))
-            throw new ArgumentNullException(nameof(password));
-            
-        return BCrypt.Net.BCrypt.HashPassword(password);
+        return _hasher.HashPassword(null!, password);
     }
 
     public bool VerifyPassword(string hashedPassword, string password)
     {
-        if (string.IsNullOrEmpty(hashedPassword))
-            throw new ArgumentNullException(nameof(hashedPassword));
-            
-        if (string.IsNullOrEmpty(password))
-            throw new ArgumentNullException(nameof(password));
-
-        try
-        {
-            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
-        }
-        catch (SaltParseException)
-        {
-            return false;
-        }
+        var result = _hasher.VerifyHashedPassword(null!, hashedPassword, password);
+        return result != PasswordVerificationResult.Failed;
     }
 }

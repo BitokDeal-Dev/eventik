@@ -42,11 +42,10 @@ public class AuthService(
 
         var user = await userRepository.GetByEmailAsync(request.Email);
         if (user == null)
-            return Result.Fail("Invalid credentials");
+            return Result.Fail("Invalid credentials, User not found!");
 
-        // Fix parameter order here - hashedPassword first, then provided password
         if (user.PasswordHash != null && !passwordHasher.VerifyPassword(user.PasswordHash, request.Password))
-            return Result.Fail("Invalid credentials");
+            return Result.Fail("Invalid credentials verify password!");
 
         return new AuthResponse(tokenService.GenerateToken(user), user.Id, user.Email);
     }
