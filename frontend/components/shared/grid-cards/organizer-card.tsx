@@ -9,7 +9,7 @@ export const OrganizerCard = ({ title, buttonText, description }:{ title:string,
                     {title}
                 </h3>
             </header>
-            <Button variant="outline" className="mx-5 rounded-full font-bold mt-5 text-lg">
+            <Button variant="outline" className="mx-5 rounded-full font-bold mt-5 text-lg hover:border-primary hover:text-primary">
                 {buttonText}
             </Button>
             <p className="px-8 pt-8 sm:px-10 sm:pt-10 mb-10 text-lg font-bold text-muted text-center">
