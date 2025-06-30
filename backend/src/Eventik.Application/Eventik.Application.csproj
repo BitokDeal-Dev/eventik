@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Eventik.Shared\Eventik.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Mappings\" />
+    </ItemGroup>
+
 </Project>
