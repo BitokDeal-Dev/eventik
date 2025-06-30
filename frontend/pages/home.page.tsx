@@ -1,5 +1,9 @@
 import React from 'react';
-import {EventsSection, Stories, WelcomeSection} from "@/components/shared";
+import {
+    EventsSection,
+    PromoCardsGrid, EmailSubscription,
+    Stories,
+} from "@/components/shared";
 
 export type EventsSectionType = {
     slug: string;
@@ -14,6 +18,12 @@ const EVENTS_DUMMY_DATA: EventsSectionType[] = [
         events: [],
         sectionImg: '/events-nearby-poster.jpg',
         slug: 'some-slug'
+    },
+    {
+        title: 'Найочікуваніші події',
+        events: [],
+        sectionImg: '/most_anticipated_events_banner.jpg',
+        slug: '/most_anticipated_events'
     }
 ]
 
@@ -21,7 +31,7 @@ const HomePage = () => {
     return (
         <div className='flex flex-col gap-5 mt-5'>
             <Stories />
-            <WelcomeSection/>
+            <PromoCardsGrid/>
             <EventsSection
                 key={EVENTS_DUMMY_DATA[0].slug}
                 slug={EVENTS_DUMMY_DATA[0].slug}
@@ -29,7 +39,15 @@ const HomePage = () => {
                 sectionImg={EVENTS_DUMMY_DATA[0].sectionImg}
                 events={EVENTS_DUMMY_DATA[0].events}
             />
-
+            <EmailSubscription />
+            <EventsSection
+                key={EVENTS_DUMMY_DATA[1].slug}
+                slug={EVENTS_DUMMY_DATA[1].slug}
+                title={EVENTS_DUMMY_DATA[1].title}
+                sectionImg={EVENTS_DUMMY_DATA[1].sectionImg}
+                events={EVENTS_DUMMY_DATA[1].events}
+                mainColor='blue'
+            />
         </div>
     );
 };
