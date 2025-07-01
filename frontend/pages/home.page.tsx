@@ -2,8 +2,9 @@ import React from 'react';
 import {
     EventsSection,
     PromoCardsGrid, EmailSubscription,
-    Stories,
+    Stories, Faq,
 } from "@/components/shared";
+import {faqs} from "@/data/faq";
 
 export type EventsSectionType = {
     slug: string;
@@ -48,6 +49,7 @@ const HomePage = () => {
                 events={EVENTS_DUMMY_DATA[1].events}
                 mainColor='blue'
             />
+            <Faq questions={faqs} />
         </div>
     );
 };
