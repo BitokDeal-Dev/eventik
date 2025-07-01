@@ -30,11 +30,11 @@ export const Stories = () => {
 
     return (
         <>
-            <article className='flex flex-col gap-5 p-5 rounded-[20px] bg-section w-full'>
+            <article className='flex flex-col gap-5 p-5 rounded-[20px] bg-section  w-full'>
                 <h2 className="max-w-lg text-3xl font-bold">
                     Ваші історії
                 </h2>
-                <section className='flex flex-wrap justify-between items-center md:items-start'>
+                <section className='flex flex-wrap justify-center gap-2 md:justify-between items-center md:items-start'>
                     {stories.map((item, i) => (
                         <img
                             key={i}

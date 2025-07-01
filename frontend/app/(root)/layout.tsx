@@ -1,4 +1,5 @@
 import HeaderModule from "@/modules/header.module";
+import {Footer} from "@/components/shared";
 
 export default function RootLayout({
                                        children,
@@ -9,6 +10,7 @@ export default function RootLayout({
         <main className='fluid-padding'>
             <HeaderModule />
             {children}
+            <Footer />
         </main>
     );
 }
