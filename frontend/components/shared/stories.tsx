@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {IStories, stories} from "@/data/stories";
 import ReactInstaStories from "react-insta-stories";
 import {X} from "lucide-react";
+import {StoriesCarousel} from "@/components/shared/stories-carousel";
 
 export const Stories = () => {
     const [open, setOpen] = useState<boolean>(false)
@@ -35,17 +36,7 @@ export const Stories = () => {
                     Ваші історії
                 </h2>
                 <section className='flex flex-wrap justify-center gap-2 md:justify-between items-center md:items-start'>
-                    {stories.map((item, i) => (
-                        <img
-                            key={i}
-                            src={item.previewImage}
-                            onClick={() => onClickStory(item)}
-                            alt={`stories ${i}`}
-                            height={250}
-                            width={200}
-                            className='rounded-md cursor-pointer'
-                        />
-                    ))}
+                   <StoriesCarousel stories={stories} onClickStory={(story) => onClickStory(story)} />
                 </section>
             </article>
 
