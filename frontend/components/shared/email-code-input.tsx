@@ -6,7 +6,11 @@ export interface EmailCodeInputRef {
     getCode: () => string;
 }
 
-export const EmailCodeInput = forwardRef<EmailCodeInputRef>((_, ref) => {
+interface Props {
+    onChange?: (code: string) => void;
+}
+
+export const EmailCodeInput = forwardRef<EmailCodeInputRef, Props>(({ onChange }, ref) => {
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
     const [values, setValues] = useState(['', '', '', '']);
 
@@ -16,6 +20,9 @@ export const EmailCodeInput = forwardRef<EmailCodeInputRef>((_, ref) => {
         const newValues = [...values];
         newValues[index] = value;
         setValues(newValues);
+
+        const code = newValues.join('');
+        onChange?.(code);
 
         if (value && index < 3) {
             inputRefs.current[index + 1]?.focus();
@@ -28,7 +35,6 @@ export const EmailCodeInput = forwardRef<EmailCodeInputRef>((_, ref) => {
         }
     };
 
-    // expose getCode method to parent
     useImperativeHandle(ref, () => ({
         getCode: () => values.join('')
     }));
@@ -38,6 +44,7 @@ export const EmailCodeInput = forwardRef<EmailCodeInputRef>((_, ref) => {
             {values.map((val, i) => (
                 <input
                     key={i}
+                    // @ts-ignore
                     ref={(el) => (inputRefs.current[i] = el)}
                     type="text"
                     inputMode="numeric"
