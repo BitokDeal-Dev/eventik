@@ -29,7 +29,7 @@ export const SignupForm = () => {
         }
     })
 
-    const {register, handleSubmit, formState: {errors}} = form;
+    const {handleSubmit, formState: {errors}} = form;
 
     const onSubmit = (values: TypeRegisterSchema) => {
         console.log(values)
@@ -91,7 +91,6 @@ export const SignupForm = () => {
             )}
 
             <OutlineInput  {...form.register("password")}
-                           name='password'
                            className='mt-5'
                            placeholder='Введіть пароль'
                            type='password'
