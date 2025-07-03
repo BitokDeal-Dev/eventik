@@ -11,7 +11,7 @@ import {
 import {Button} from "@/components/ui/button";
 import {useTheme} from "next-themes";
 import ReCAPTCHA from "react-google-recaptcha";
-import {useRegisterForm} from "@/modules/auth/signup/hooks/useRegisterForm";
+import {useRegisterForm} from "@/modules/auth/signup/hooks/";
 
 export const SignupForm = () => {
     const {resolvedTheme} = useTheme()

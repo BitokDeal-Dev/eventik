@@ -27,7 +27,7 @@ export const useSigninForm = () => {
             form.reset();
             setInputsData({email: "", password: ""});
             setRecaptchaValue("");
-            router.push("/");
+            router.push("/verification");
         }
     }, [isSuccess]);
 
