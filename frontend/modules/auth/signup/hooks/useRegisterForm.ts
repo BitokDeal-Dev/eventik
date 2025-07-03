@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSignupMutation } from "@/modules/auth/hooks";
+import { useSignupMutation } from "@/modules/auth/signup/hooks/index";
 import { RegisterSchema, TypeRegisterSchema } from "@/modules/auth/signup/schemes";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";

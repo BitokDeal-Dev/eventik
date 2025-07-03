@@ -1,41 +1,26 @@
 'use client'
 
-import React, {useState} from 'react';
-import {ErrorMessage, Title} from "@/components/shared";
-import OutlineInput from "@/components/ui/outline-input";
+import React from 'react';
+import {ErrorMessage, FormInput, Spinner, Title} from "@/components/shared";
 import {Button} from "@/components/ui/button";
-import {useForm} from "react-hook-form";
-import {LoginSchema, TypeLoginSchema} from "@/modules/auth/signin/schemes";
-import {yupResolver} from "@hookform/resolvers/yup";
 import {useTheme} from "next-themes";
 import ReCAPTCHA from "react-google-recaptcha";
+import {useSigninForm} from "@/modules/auth/signin/hooks";
 
 export const SigninForm = () => {
-    const [inputsData, setInputsData] = useState({
-        email: '',
-        password: '',
-    })
-    const form = useForm({
-        resolver: yupResolver(LoginSchema),
-        defaultValues: {
-            email: '',
-            password: ''
-        }
-    })
-    const [recaptchaValue, setRecaptchaValue] = useState<string | null>('')
+    const {
+        onSubmit,
+        isError,
+        isDisabledButton,
+        isLoadingLogin,
+        form,
+        setRecaptchaValue,
+        setInputsData
+    } = useSigninForm()
     const {resolvedTheme} = useTheme()
-    const {handleSubmit, formState: {errors}} = form;
-
-    const onSubmit = (values: TypeLoginSchema) => {
-        console.log(values)
-    }
-    const isDisabledButton =
-        Object.keys(errors).length > 0 ||
-        !inputsData.email.trim() ||
-        !inputsData.password.trim() || !recaptchaValue
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}
+        <form onSubmit={form.handleSubmit(onSubmit)}
               className='flex justify-center flex-col'>
             <a href='/' className="flex justify-center">
                 <img src="/logo.svg" alt="eventik-logo"/>
@@ -47,39 +32,34 @@ export const SigninForm = () => {
                 зареєстровані, ви можете створити акаунт.
             </p>
 
-            <OutlineInput
-                placeholder='Введіть ваш Email адрес'
-                type='email'
-                {...form.register("email", {
-                    onChange: (e) => {
-                        setInputsData((prev) => ({
-                            ...prev,
-                            email: e.target.value,
-                        }));
-                    },
-                })}
+            <FormInput
+                name="email"
+                placeholder="Введіть ваш Email адрес"
+                type="email"
+                disabled={isLoadingLogin}
+                register={form.register}
+                error={form.formState.errors.email}
+                className="mt-5"
+                onChange={(e) => setInputsData(prev => ({
+                    ...prev,
+                    email: e.target.value
+                }))}
             />
-            {errors.email && (
-                <ErrorMessage
-                    className='mt-1'>{errors.email.message}</ErrorMessage>
-            )}
-            <OutlineInput
-                className='mt-5'
-                placeholder='Введіть пароль'
-                type='password'
-                {...form.register("password", {
-                    onChange: (e) => {
-                        setInputsData((prev) => ({
-                            ...prev,
-                            password: e.target.value,
-                        }));
-                    },
-                })}
+
+            <FormInput
+                name="password"
+                placeholder="Введіть пароль"
+                type="password"
+                disabled={isLoadingLogin}
+                register={form.register}
+                error={form.formState.errors.password}
+                className="mt-5"
+                onChange={(e) => setInputsData(prev => ({
+                    ...prev,
+                    password: e.target.value
+                }))}
             />
-            {errors.password && (
-                <ErrorMessage
-                    className='mt-1'>{errors.password.message}</ErrorMessage>
-            )}
+
             <div className='flex justify-center my-5'>
                 <ReCAPTCHA
                     sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string}
@@ -88,7 +68,17 @@ export const SigninForm = () => {
                 />
             </div>
             <Button disabled={isDisabledButton} type='submit'
-                    className='text-xl font-bold mt-5'>Увійти</Button>
+                    className='text-xl font-bold mt-5'>{isLoadingLogin ? (
+                <div className='flex items-center'>
+                    <Spinner/>
+                    <p>Шукаємо акаунт...</p>
+                </div>
+            ) : 'Створити акаунт'}</Button>
+            {isError && (
+                <ErrorMessage className='mt-1 flex justify-center w-full'>
+                    Сталась помилка під-час входу в акаунт
+                </ErrorMessage>
+            )}
             <label htmlFor='agree'
                    className='text-sm text-muted leading-snug justify-center flex gap-1 mt-5'>
                 Я не маю акаунта{' '}

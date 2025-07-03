@@ -1,5 +1,5 @@
 import {useMutation} from "@tanstack/react-query";
-import {signupService} from "@/modules/auth/api/signup.service";
+import {signupService} from "@/modules/auth/services/signup.service";
 import {TypeRegisterSchema} from "@/modules/auth/signup/schemes";
 
 export const useSignupMutation = () => {
