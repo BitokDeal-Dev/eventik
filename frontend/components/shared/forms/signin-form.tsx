@@ -7,6 +7,8 @@ import {Button} from "@/components/ui/button";
 import {useForm} from "react-hook-form";
 import {LoginSchema, TypeLoginSchema} from "@/modules/auth/signin/schemes";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {useTheme} from "next-themes";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export const SigninForm = () => {
     const [inputsData, setInputsData] = useState({
@@ -20,7 +22,8 @@ export const SigninForm = () => {
             password: ''
         }
     })
-
+    const [recaptchaValue, setRecaptchaValue] = useState<string | null>('')
+    const {resolvedTheme} = useTheme()
     const {handleSubmit, formState: {errors}} = form;
 
     const onSubmit = (values: TypeLoginSchema) => {
@@ -29,10 +32,11 @@ export const SigninForm = () => {
     const isDisabledButton =
         Object.keys(errors).length > 0 ||
         !inputsData.email.trim() ||
-        !inputsData.password.trim();
+        !inputsData.password.trim() || !recaptchaValue
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='flex justify-center flex-col'>
+        <form onSubmit={handleSubmit(onSubmit)}
+              className='flex justify-center flex-col'>
             <a href='/' className="flex justify-center">
                 <img src="/logo.svg" alt="eventik-logo"/>
             </a>
@@ -76,10 +80,15 @@ export const SigninForm = () => {
                 <ErrorMessage
                     className='mt-1'>{errors.password.message}</ErrorMessage>
             )}
-
-
-            <Button disabled={isDisabledButton} type='submit' className='text-xl font-bold mt-5'>Увійти</Button>
-
+            <div className='flex justify-center my-5'>
+                <ReCAPTCHA
+                    sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string}
+                    theme={resolvedTheme as 'dark' | 'light'}
+                    onChange={setRecaptchaValue}
+                />
+            </div>
+            <Button disabled={isDisabledButton} type='submit'
+                    className='text-xl font-bold mt-5'>Увійти</Button>
             <label htmlFor='agree'
                    className='text-sm text-muted leading-snug justify-center flex gap-1 mt-5'>
                 Я не маю акаунта{' '}

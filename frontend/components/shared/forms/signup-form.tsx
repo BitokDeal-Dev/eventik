@@ -11,10 +11,14 @@ import {
     RegisterSchema,
     TypeRegisterSchema
 } from "@/modules/auth/signup/schemes";
+import {useTheme} from "next-themes";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export const SignupForm = () => {
     const [agree, setAgree] = useState(false);
     const [subscribe, setSubscribe] = useState(false);
+    const [recaptchaValue, setRecaptchaValue] = useState<string | null>('')
+    const {resolvedTheme} = useTheme()
     const [inputsData, setInputsData] = useState({
         email: '',
         password: '',
@@ -28,7 +32,6 @@ export const SignupForm = () => {
             password: ''
         }
     })
-
     const {handleSubmit, formState: {errors}} = form;
 
     const onSubmit = (values: TypeRegisterSchema) => {
@@ -40,7 +43,8 @@ export const SignupForm = () => {
         Object.keys(errors).length > 0 ||
         !inputsData.userFullName.trim() ||
         !inputsData.email.trim() ||
-        !inputsData.password.trim();
+        !inputsData.password.trim() || !recaptchaValue
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}
@@ -131,6 +135,13 @@ export const SignupForm = () => {
                           id='subscribe' className='bg-muted'/>
                 <p className='text-sm text-muted mb-5'>Отримати розсилку на
                     пошту</p>
+            </div>
+            <div className='flex justify-center mb-5'>
+                <ReCAPTCHA
+                    sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string}
+                    theme={resolvedTheme as 'dark' | 'light'}
+                    onChange={setRecaptchaValue}
+                />
             </div>
             <Button type='submit' disabled={isDisabledButton}
                     className='text-xl font-bold'>Створити акаунт</Button>
