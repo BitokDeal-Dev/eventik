@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   env:{
       NEXT_PUBLIC_API_URL:process.env.NEXT_PUBLIC_API_URL,
       GOOGLE_RECAPTCHA_SITE_KEY:process.env.GOOGLE_RECAPTCHA_SITE_KEY,
+      GOOGLE_API_KEY:process.env.GOOGLE_API_KEY
   }
 };
 
