@@ -1,9 +1,8 @@
 'use client'
 
-import React from 'react';
-import {GoogleMap, Marker, useJsApiLoader} from '@react-google-maps/api'
+import React, {useState} from 'react';
+import {GoogleMap, Marker} from '@react-google-maps/api'
 import {googleMapStyles} from "@/lib/mapStyles";
-import {AutoComplete} from "@/components/shared/auto-complete";
 import {useLocationStore} from "@/modules/location/store/location.store";
 
 const containerStyle = {
@@ -24,11 +23,14 @@ const defaultOptions = {
     fullscreenControl: false,
     styles: googleMapStyles
 }
-
-export const Map = ({isLoaded}:{isLoaded:boolean}) => {
-    const {location: center} = useLocationStore()
-    const [map, setMap] = React.useState(null)
-
+const center = {
+    lat: -3.745,
+    lng: -38.523
+}
+export const Map = ({isLoaded}: { isLoaded: boolean }) => {
+    const {setLocation} = useLocationStore()
+    const [map, setMap] = useState(null)
+    const [markerCenter, setMarkerCenter] = useState(center)
     const onLoad = React.useCallback(function callback(map: any) {
         // const bounds = new window.google.maps.LatLngBounds(center)
         // map.fitBounds(bounds)
@@ -39,6 +41,18 @@ export const Map = ({isLoaded}:{isLoaded:boolean}) => {
         setMap(null)
     }, [])
 
+    const onMapCenterChange = () => {
+        if (!map) return;
+
+        const center = map.getCenter();
+        if (center) {
+            const lat = center.lat();
+            const lng = center.lng();
+            setMarkerCenter({lat, lng});
+            setLocation({lat, lng});
+        }
+    }
+
     return isLoaded ? (
         <GoogleMap
             mapContainerStyle={containerStyle}
@@ -47,8 +61,9 @@ export const Map = ({isLoaded}:{isLoaded:boolean}) => {
             onLoad={onLoad}
             onUnmount={onUnmount}
             options={defaultOptions}
+            onCenterChanged={onMapCenterChange}
         >
-            <Marker  position={center}/>
+            <Marker position={markerCenter}/>
         </GoogleMap>
     ) : (
         <></>

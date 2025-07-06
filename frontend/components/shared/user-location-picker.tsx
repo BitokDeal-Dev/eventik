@@ -17,7 +17,7 @@ export const UserLocationPicker = () => {
         <UserOnboardingStep
             title="Оберіть ваше місцезнаходження"
             description="Вкажіть, де ви знаходитесь або де хочете шукати події. Натисніть на карту, щоб обрати точку. Це допоможе показувати івенти, які відбуваються поруч."
-            className='justify-center items-center gap-10 mt-0'
+            className='justify-center md:justify-between items-center mt-0'
             onClick={() => {
                 // handle save
             }}
