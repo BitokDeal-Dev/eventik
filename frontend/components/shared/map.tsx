@@ -1,37 +1,41 @@
 'use client'
 
 import React from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import {GoogleMap, Marker, useJsApiLoader} from '@react-google-maps/api'
+import {googleMapStyles} from "@/lib/mapStyles";
+import {AutoComplete} from "@/components/shared/auto-complete";
+import {useLocationStore} from "@/modules/location/store/location.store";
 
 const containerStyle = {
-    width: '400px',
-    height: '400px',
+    width: '800px',
+    height: '600px',
 }
 
-const center = {
-    lat: -3.745,
-    lng: -38.523,
+const defaultOptions = {
+    panControl: true,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+    clickableIcons: false,
+    keyboardShortcuts: false,
+    disableDoubleClickZoom: true,
+    fullscreenControl: false,
+    styles: googleMapStyles
 }
 
-
-export const Map = () => {
-    const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY!
-    const { isLoaded } = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: GOOGLE_API_KEY,
-    })
-
+export const Map = ({isLoaded}:{isLoaded:boolean}) => {
+    const {location: center} = useLocationStore()
     const [map, setMap] = React.useState(null)
 
-    const onLoad = React.useCallback(function callback(map) {
-        // This is just an example of getting and using the map instance!!! don't just blindly copy!
-        const bounds = new window.google.maps.LatLngBounds(center)
-        map.fitBounds(bounds)
-
+    const onLoad = React.useCallback(function callback(map: any) {
+        // const bounds = new window.google.maps.LatLngBounds(center)
+        // map.fitBounds(bounds)
         setMap(map)
     }, [])
 
-    const onUnmount = React.useCallback(function callback(map) {
+    const onUnmount = React.useCallback(function callback(map: any) {
         setMap(null)
     }, [])
 
@@ -39,12 +43,12 @@ export const Map = () => {
         <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={10}
+            zoom={7}
             onLoad={onLoad}
             onUnmount={onUnmount}
+            options={defaultOptions}
         >
-            {/* Child components, such as markers, info windows, etc. */}
-            <></>
+            <Marker  position={center}/>
         </GoogleMap>
     ) : (
         <></>

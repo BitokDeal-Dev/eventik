@@ -3,9 +3,7 @@ import {UserLocationPicker} from "@/components/shared";
 
 const Page = () => {
     return (
-        <div>
             <UserLocationPicker />
-        </div>
     );
 };
 
