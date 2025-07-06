@@ -1,6 +1,6 @@
 import {create} from "zustand";
 
-interface ILocationType {
+export interface ILocationType {
     lat: number,
     lng: number
 }

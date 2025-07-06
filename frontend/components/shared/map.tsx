@@ -3,7 +3,10 @@
 import React, {useState} from 'react';
 import {GoogleMap, Marker} from '@react-google-maps/api'
 import {googleMapStyles} from "@/lib/mapStyles";
-import {useLocationStore} from "@/modules/location/store/location.store";
+import {
+    ILocationType,
+    useLocationStore
+} from "@/modules/location/store/location.store";
 
 const containerStyle = {
     width: '800px',
@@ -23,11 +26,11 @@ const defaultOptions = {
     fullscreenControl: false,
     styles: googleMapStyles
 }
-const center = {
-    lat: -3.745,
-    lng: -38.523
-}
-export const Map = ({isLoaded}: { isLoaded: boolean }) => {
+
+export const Map = ({isLoaded, center}: {
+    isLoaded: boolean,
+    center: ILocationType
+}) => {
     const {setLocation} = useLocationStore()
     const [map, setMap] = useState(null)
     const [markerCenter, setMarkerCenter] = useState(center)
@@ -53,20 +56,16 @@ export const Map = ({isLoaded}: { isLoaded: boolean }) => {
         }
     }
 
-    return isLoaded ? (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={7}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-            options={defaultOptions}
-            onCenterChanged={onMapCenterChange}
-        >
-            <Marker position={markerCenter}/>
-        </GoogleMap>
-    ) : (
-        <></>
-    )
+    return <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={7}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        options={defaultOptions}
+        onCenterChanged={onMapCenterChange}
+    >
+        <Marker position={markerCenter}/>
+    </GoogleMap>
 };
 
