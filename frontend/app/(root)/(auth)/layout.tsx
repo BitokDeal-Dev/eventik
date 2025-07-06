@@ -1,5 +1,4 @@
-import HeaderModule from "@/modules/header/header.module";
-import {Footer} from "@/components/shared";
+import {AuthLayout, Footer} from "@/components/shared";
 
 export default function RootLayout({
                                        children,
@@ -7,10 +6,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className='fluid-padding'>
-            <HeaderModule />
+        <AuthLayout>
             {children}
-            <Footer />
-        </main>
+        </AuthLayout>
     );
 }

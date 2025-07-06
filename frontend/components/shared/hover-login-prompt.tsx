@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/hover-card"
 import {Button} from "@/components/ui/button";
 
-
 export const HoverLoginPrompt = ({trigger}: { trigger: React.ReactNode }) => {
     return (
         <HoverCard openDelay={100}>
@@ -19,8 +18,16 @@ export const HoverLoginPrompt = ({trigger}: { trigger: React.ReactNode }) => {
                     зберігати улюблені події.
                     Після входу ви зможете створити публічний профіль та
                     залишати відгуки.</p>
-                <Button className='py-4!'>Увійти або зареєструватись</Button>
-                <Button variant='secondary' className='py-4!'>Особистий кабінет</Button>
+                <Button className='py-4!'>
+                    <a href='/signin'>
+                        Увійти або зареєструватись
+                    </a>
+                </Button>
+                <Button variant='secondary' className='py-4!'>
+                    <a href='/me'>
+                        Особистий кабінет
+                    </a>
+                </Button>
             </HoverCardContent>
 
         </HoverCard>
