@@ -12,6 +12,8 @@ import {Button} from "@/components/ui/button";
 import {useTheme} from "next-themes";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useRegisterForm} from "@/modules/auth/signup/hooks/";
+import Link from 'next/link';
+
 
 export const SignupForm = () => {
     const {resolvedTheme} = useTheme()
@@ -30,9 +32,9 @@ export const SignupForm = () => {
     } = useRegisterForm();
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className='flex justify-center flex-col'>
-            <a href='/' className="flex justify-center">
+            <Link href='/' className="flex justify-center">
                 <img src="/logo.svg" alt="eventik-logo"/>
-            </a>
+            </Link>
 
             <Title className='font-black'>Реєстрація акаунта</Title>
             <p className='text-left text-muted my-5 text-base'>
@@ -104,7 +106,7 @@ export const SignupForm = () => {
 
             <label className='text-sm text-muted leading-snug justify-center flex gap-1 mt-5'>
                 Вже маю акаунт{' '}
-                <a href='/signin' className='text-primary underline font-medium'>Увійти в акаунт</a>
+                <Link href='/signin' className='text-primary underline font-medium'>Увійти в акаунт</Link>
             </label>
         </form>
     );

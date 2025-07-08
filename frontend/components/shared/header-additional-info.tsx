@@ -5,7 +5,7 @@ export const HeaderAdditionalInfo = () => {
     return (
         <nav
             className="flex justify-between items-center px-16 mb-3 flex-wrap gap-2">
-            {headerAdditionData.map((item, i) => (
+            {headerAdditionData.map((item) => (
                 <p key={item.name}
                    className="hidden md:block text-sm font-medium text-muted cursor-pointer hover:opacity-70 transition-all duration-100">{item.name}</p>
             ))}

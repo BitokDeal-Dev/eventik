@@ -1,8 +1,7 @@
 'use client'
 
 import React from 'react';
-import {Title, InterestsList, UserOnboardingStep} from "@/components/shared/";
-import {Button} from "@/components/ui/button";
+import {InterestsList, UserOnboardingStep} from "@/components/shared/";
 import {useInterestStore} from "@/modules/interests/store/interests.store";
 
 export const UserInterestsPicker = () => {
@@ -16,6 +15,7 @@ export const UserInterestsPicker = () => {
             onClick={() => {
                 // handle save
             }}
+            className='flex-col md:flex-row!'
         >
             <InterestsList />
         </UserOnboardingStep>

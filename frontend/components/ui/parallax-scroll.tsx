@@ -14,7 +14,7 @@ export const ParallaxScroll = ({
     renderItem: (item: IInterest) => React.ReactNode;
     className?: string;
 }) => {
-    const gridRef = useRef<any>(null);
+    const gridRef = useRef<HTMLDivElement | null>(null);
     const { scrollYProgress } = useScroll({
         container: gridRef,
         offset: ["start start", "end start"],

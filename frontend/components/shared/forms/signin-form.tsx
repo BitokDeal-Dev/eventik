@@ -6,6 +6,7 @@ import {Button} from "@/components/ui/button";
 import {useTheme} from "next-themes";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useSigninForm} from "@/modules/auth/signin/hooks";
+import Link from 'next/link';
 
 export const SigninForm = () => {
     const {
@@ -22,9 +23,9 @@ export const SigninForm = () => {
     return (
         <form onSubmit={form.handleSubmit(onSubmit)}
               className='flex justify-center flex-col'>
-            <a href='/' className="flex justify-center">
+            <Link href='/' className="flex justify-center">
                 <img src="/logo.svg" alt="eventik-logo"/>
-            </a>
+            </Link>
 
             <Title className='font-black'>Вхід в акаунту</Title>
             <p className='text-left text-muted my-5 text-base'>
@@ -83,10 +84,10 @@ export const SigninForm = () => {
                    className='text-sm text-muted leading-snug justify-center flex gap-1 mt-5'>
                 Я не маю акаунта{' '}
 
-                <a href='/signup'
+                <Link href='/signup'
                    className='text-primary underline font-medium'>
                     Створити акаунт
-                </a>
+                </Link>
             </label>
         </form>
     );

@@ -26,7 +26,7 @@ export const UserOnboardingStep = ({
                                    }: Props) => {
     return (
         <section
-            className={cn('flex justify-center w-full items-center mt-10 flex-wrap', className)}>
+            className={cn('flex justify-center w-full items-center mt-10 ', className)}>
             <div
                 className="text-center items-center justify-center flex flex-col gap-3">
                 <Title
