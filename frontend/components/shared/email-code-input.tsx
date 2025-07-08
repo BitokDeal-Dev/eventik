@@ -13,7 +13,7 @@ interface Props {
 export const EmailCodeInput = forwardRef<EmailCodeInputRef, Props>(({ onChange }, ref) => {
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
     const [values, setValues] = useState(['', '', '', '']);
-
+    EmailCodeInput.displayName = "EmailCodeInput";
     const handleChange = (index: number, value: string) => {
         if (!/^\d?$/.test(value)) return;
 
@@ -44,7 +44,7 @@ export const EmailCodeInput = forwardRef<EmailCodeInputRef, Props>(({ onChange }
             {values.map((val, i) => (
                 <input
                     key={i}
-                    // @ts-ignore
+                    // @ts-expect-error: assigning ref manually to array element
                     ref={(el) => (inputRefs.current[i] = el)}
                     type="text"
                     inputMode="numeric"

@@ -1,4 +1,4 @@
-import {AuthLayout, Footer} from "@/components/shared";
+import {AuthLayout} from "@/components/shared";
 
 export default function RootLayout({
                                        children,

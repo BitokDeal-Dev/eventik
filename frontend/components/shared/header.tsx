@@ -10,6 +10,7 @@ import {
 } from "@/components/shared/";
 import {Button} from "@/components/ui/button";
 import {Menu, X} from "lucide-react";
+import Link from 'next/link';
 
 export const Header = () => {
     const [isOpenModal, setIsOpenModal] = useState(false)
@@ -18,9 +19,9 @@ export const Header = () => {
 
     return (
         <nav className="flex items-center  gap-4 py-2">
-            <a href='/' className="flex">
+            <Link href='/' className="flex">
                 <img src="/logo.svg" alt="eventik-logo"/>
-            </a>
+            </Link>
 
             <div className="flex-[2]">
                 <HeaderInput/>

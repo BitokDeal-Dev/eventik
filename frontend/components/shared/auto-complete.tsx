@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
@@ -24,8 +24,6 @@ export const AutoComplete = ({isLoaded}:{isLoaded:boolean}) => {
     });
     const {setLocation} = useLocationStore()
     const ref = useOnclickOutside(() => {
-        // When the user clicks outside of the component, we can dismiss
-        // the searched suggestions by calling this method
         clearSuggestions();
     });
 
@@ -34,15 +32,15 @@ export const AutoComplete = ({isLoaded}:{isLoaded:boolean}) => {
             init()
         }
 
-    }, [isLoaded]);
+    }, [isLoaded, init]);
 
-    const handleInput = (e:any) => {
+    const handleInput = (e:ChangeEvent<HTMLInputElement>) => {
         // Update the keyword of the input element
         setValue(e.target.value);
     };
 
     const handleSelect =
-        ({ description }:{description:any}) =>
+        ({ description }:{description:string}) =>
             () => {
                 // When the user selects a place, we can replace the keyword without request data from API
                 // by setting the second parameter to "false"

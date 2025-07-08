@@ -31,7 +31,7 @@ export const UserLocationPicker = () => {
             }
         }
         getUserLocation()
-    }, []);
+    }, [setLocation]);
 
     useEffect(() => {
         if (userLocation)
@@ -42,14 +42,14 @@ export const UserLocationPicker = () => {
         <UserOnboardingStep
             title="Оберіть ваше місцезнаходження"
             description="Вкажіть, де ви знаходитесь або де хочете шукати події. Натисніть на карту, щоб обрати точку. Це допоможе показувати івенти, які відбуваються поруч."
-            className='justify-center gap-10 xl:gap-0 xl:justify-between items-center mt-0'
+            className='justify-center gap-10 xl:gap-0 xl:justify-between items-center mt-0 flex-wrap'
             onClick={() => {
                 // handle save
             }}
             other={<AutoComplete isLoaded={isLoaded}/>}
         >
             {isLoading && !isLoaded ? <p>loading...</p> :
-                <Map center={userLocation!} isLoaded={isLoaded}/>
+                <Map center={userLocation!}/>
             }
         </UserOnboardingStep>
 

@@ -4,6 +4,7 @@ import {
     footerSupport, footerUseful,
     footerUser
 } from "@/data/layout-data";
+import Link from 'next/link';
 import React from "react";
 
 export const Footer = () => {
@@ -32,9 +33,9 @@ export const Footer = () => {
                            items={footerUser}/>
 
             <div className='flex items-center'>
-                <a href='/' className="flex">
+                <Link href='/' className="flex">
                     <img src="/logo.svg" alt="eventik-logo"/>
-                </a>
+                </Link>
                 <p className='text-muted text-sm'>© 2025 Eventic. Всі права захищені.</p>
             </div>
         </footer>

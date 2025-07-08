@@ -8,6 +8,7 @@ import {
     useLocationStore
 } from "@/modules/location/store/location.store";
 
+
 const containerStyle = {
     width: '800px',
     height: '600px',
@@ -27,20 +28,19 @@ const defaultOptions = {
     styles: googleMapStyles
 }
 
-export const Map = ({isLoaded, center}: {
-    isLoaded: boolean,
+export const Map = ({center}: {
     center: ILocationType
 }) => {
     const {setLocation} = useLocationStore()
-    const [map, setMap] = useState(null)
+
+    const [map, setMap] = useState<google.maps.Map | null>(null)
     const [markerCenter, setMarkerCenter] = useState(center)
-    const onLoad = React.useCallback(function callback(map: any) {
-        // const bounds = new window.google.maps.LatLngBounds(center)
-        // map.fitBounds(bounds)
+
+    const onLoad = React.useCallback((map: google.maps.Map) => {
         setMap(map)
     }, [])
 
-    const onUnmount = React.useCallback(function callback(map: any) {
+    const onUnmount = React.useCallback(() => {
         setMap(null)
     }, [])
 
@@ -68,4 +68,3 @@ export const Map = ({isLoaded, center}: {
         <Marker position={markerCenter}/>
     </GoogleMap>
 };
-
