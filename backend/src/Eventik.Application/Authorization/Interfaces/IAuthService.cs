@@ -1,8 +1,8 @@
-﻿using Eventik.Application.DTOs.Auth.Request;
+﻿using Eventik.Application.Authorization.DTOs.Request;
 using Eventik.Application.DTOs.Auth.Response;
 using FluentResults;
 
-namespace Eventik.Application.Interfaces.Services;
+namespace Eventik.Application.Authorization.Interfaces;
 
 public interface IAuthService
 {

@@ -1,10 +1,10 @@
-﻿using Eventik.Application.DTOs.Auth.Request;
+﻿using Eventik.Application.Authorization.DTOs.Request;
+using Eventik.Application.Authorization.Interfaces;
 using Eventik.Application.DTOs.Auth.Response;
-using Eventik.Application.Interfaces.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Eventik.API.Endpoints;
+namespace Eventik.API.Endpoints.Authorization;
 
 public static class AuthEndpoints
 {

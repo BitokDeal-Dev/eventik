@@ -1,11 +1,11 @@
-﻿using Eventik.Application.DTOs.Users;
-using Eventik.Application.Interfaces.Services;
+﻿using Eventik.Application.Users.DTOs;
+using Eventik.Application.Users.Interfaces.Services;
 using Eventik.Core.Entities;
 using Eventik.Core.Interfaces.Repositories;
 using Eventik.Core.Interfaces.Services;
 using FluentResults;
 
-namespace Eventik.Application.Services;
+namespace Eventik.Application.Users.Services;
 
 public class UserService(
     IUserRepository userRepository,

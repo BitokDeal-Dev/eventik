@@ -1,12 +1,12 @@
-﻿using Eventik.Application.DTOs.Auth.Request;
+﻿using Eventik.Application.Authorization.DTOs.Request;
+using Eventik.Application.Authorization.Interfaces;
 using Eventik.Application.DTOs.Auth.Response;
-using Eventik.Application.Interfaces.Services;
 using Eventik.Core.Entities;
 using Eventik.Core.Interfaces.Repositories;
 using Eventik.Core.Interfaces.Services;
 using FluentResults;
 
-namespace Eventik.Application.Services;
+namespace Eventik.Application.Authorization.Services;
 
 public class AuthService(
     IUserRepository userRepository,

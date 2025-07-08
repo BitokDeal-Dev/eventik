@@ -1,4 +1,4 @@
-using Eventik.API.Endpoints;
+using Eventik.API.Endpoints.Authorization;
 using Eventik.API.ServiceConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);

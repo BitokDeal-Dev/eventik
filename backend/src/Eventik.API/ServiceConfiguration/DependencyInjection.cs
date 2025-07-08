@@ -1,6 +1,8 @@
 ﻿using System.Text;
-using Eventik.Application.Interfaces.Services;
-using Eventik.Application.Services;
+using Eventik.Application.Authorization.Interfaces;
+using Eventik.Application.Authorization.Services;
+using Eventik.Application.Users.Interfaces.Services;
+using Eventik.Application.Users.Services;
 using Eventik.Core.Entities;
 using Eventik.Core.Interfaces.Repositories;
 using Eventik.Core.Interfaces.Services;

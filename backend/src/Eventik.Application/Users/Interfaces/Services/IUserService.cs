@@ -1,7 +1,7 @@
-﻿using Eventik.Application.DTOs.Users;
+﻿using Eventik.Application.Users.DTOs;
 using FluentResults;
 
-namespace Eventik.Application.Interfaces.Services;
+namespace Eventik.Application.Users.Interfaces.Services;
 
 public interface IUserService
 {
